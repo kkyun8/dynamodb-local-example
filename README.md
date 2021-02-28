@@ -1,4 +1,4 @@
-# world_caricature_dynamodb_local
+# dynamodb-local-example
 
 開発用ローカルdynamodb
 
