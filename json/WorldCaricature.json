@@ -1,0 +1,283 @@
+{
+  "ModelName": "WorldCaricature",
+  "ModelMetadata": {
+    "Author": "",
+    "DateCreated": "Feb 27, 2021, 11:10 AM",
+    "DateLastModified": "Mar 02, 2021, 11:53 PM",
+    "Description": "ワルド似顔絵DB",
+    "AWSService": "Amazon DynamoDB",
+    "Version": "2.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "_products",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "product_id",
+          "AttributeType": "N"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "title",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "order_type",
+          "AttributeType": "NS"
+        },
+        {
+          "AttributeName": "number_of_people",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "price",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "production_time",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "information",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "product_detail_image_url",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "artist_id",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "artist_comment",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "sort",
+          "AttributeType": "M"
+        },
+        {
+          "AttributeName": "delflg",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "created_at",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "updated_at",
+          "AttributeType": "S"
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    },
+    {
+      "TableName": "_artists",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "artist_id",
+          "AttributeType": "N"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "artist_name",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "service_years",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "career_data",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "delflg",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "created_at",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "updated_at",
+          "AttributeType": "S"
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    },
+    {
+      "TableName": "_orders",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "order_id",
+          "AttributeType": "N"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "product_options",
+          "AttributeType": "M"
+        },
+        {
+          "AttributeName": "order_number",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "order_status_id",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "name_kanzi",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "name_furigana",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "email",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "line_id",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "cell_phone_number",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "postalCode",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "address1",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "address2",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "comment",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "price",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "is_send_email",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "is_send_line",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "picture_url_key",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "idempotencyKey",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "payment_status",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "payment_order_id",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "payment_source_type",
+          "AttributeType": "S"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "order_status_id_index",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "order_status_id",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "KEYS_ONLY"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    },
+    {
+      "TableName": "products",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "product_id",
+          "AttributeType": "S"
+        }
+      },
+      "DataAccess": {
+        "MySql": {}
+      }
+    },
+    {
+      "TableName": "orders",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "order_id",
+          "AttributeType": "S"
+        }
+      },
+      "DataAccess": {
+        "MySql": {}
+      }
+    },
+    {
+      "TableName": "artists",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "artist_id",
+          "AttributeType": "S"
+        }
+      },
+      "DataAccess": {
+        "MySql": {}
+      }
+    },
+    {
+      "TableName": "order_item_labels",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "itam_id",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "label_id",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "label",
+          "AttributeType": "S"
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    }
+  ]
+}
