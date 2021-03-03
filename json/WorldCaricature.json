@@ -3,18 +3,18 @@
   "ModelMetadata": {
     "Author": "",
     "DateCreated": "Feb 27, 2021, 11:10 AM",
-    "DateLastModified": "Mar 02, 2021, 11:53 PM",
+    "DateLastModified": "Mar 03, 2021, 10:03 PM",
     "Description": "ワルド似顔絵DB",
     "AWSService": "Amazon DynamoDB",
     "Version": "2.0"
   },
   "DataModel": [
     {
-      "TableName": "_products",
+      "TableName": "products",
       "KeyAttributes": {
         "PartitionKey": {
           "AttributeName": "product_id",
-          "AttributeType": "N"
+          "AttributeType": "S"
         }
       },
       "NonKeyAttributes": [
@@ -59,7 +59,7 @@
           "AttributeType": "M"
         },
         {
-          "AttributeName": "delflg",
+          "AttributeName": "is_delete",
           "AttributeType": "BOOL"
         },
         {
@@ -71,33 +71,91 @@
           "AttributeType": "S"
         }
       ],
+      "TableData": [
+        {
+          "product_id": {
+            "S": "202001019TEST"
+          },
+          "title": {
+            "S": "二人のため"
+          },
+          "order_type": {
+            "NS": [
+              1,
+              4
+            ]
+          },
+          "number_of_people": {
+            "N": "2"
+          },
+          "price": {
+            "N": "10000"
+          },
+          "production_time": {
+            "S": "一周間"
+          },
+          "information": {
+            "S": "information二人のため"
+          },
+          "product_detail_image_url": {
+            "S": "url"
+          },
+          "artist_id": {
+            "N": "1"
+          }
+        }
+      ],
       "DataAccess": {
         "MySql": {}
       }
     },
     {
-      "TableName": "_artists",
+      "TableName": "artists",
       "KeyAttributes": {
         "PartitionKey": {
-          "AttributeName": "artist_id",
-          "AttributeType": "N"
+          "AttributeName": "email",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "artist_nickname",
+          "AttributeType": "S"
         }
       },
       "NonKeyAttributes": [
-        {
-          "AttributeName": "artist_name",
-          "AttributeType": "S"
-        },
         {
           "AttributeName": "service_years",
           "AttributeType": "N"
         },
         {
-          "AttributeName": "career_data",
+          "AttributeName": "career_info",
           "AttributeType": "S"
         },
         {
-          "AttributeName": "delflg",
+          "AttributeName": "line_id",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "name",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "phone_number",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "postal_code",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "address",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "is_delete",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "is_admin",
           "AttributeType": "BOOL"
         },
         {
@@ -109,16 +167,39 @@
           "AttributeType": "S"
         }
       ],
+      "TableData": [
+        {
+          "email": {
+            "S": "test@email.com"
+          },
+          "artist_nickname": {
+            "S": "kki"
+          },
+          "service_years": {
+            "N": "5"
+          },
+          "career_info": {
+            "S": "全国優勝"
+          },
+          "name": {
+            "S": "キム"
+          }
+        }
+      ],
       "DataAccess": {
         "MySql": {}
       }
     },
     {
-      "TableName": "_orders",
+      "TableName": "orders",
       "KeyAttributes": {
         "PartitionKey": {
           "AttributeName": "order_id",
-          "AttributeType": "N"
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "order_status_id",
+          "AttributeType": "S"
         }
       },
       "NonKeyAttributes": [
@@ -128,10 +209,6 @@
         },
         {
           "AttributeName": "order_number",
-          "AttributeType": "S"
-        },
-        {
-          "AttributeName": "order_status_id",
           "AttributeType": "S"
         },
         {
@@ -155,7 +232,7 @@
           "AttributeType": "S"
         },
         {
-          "AttributeName": "postalCode",
+          "AttributeName": "postal_code",
           "AttributeType": "S"
         },
         {
@@ -187,7 +264,7 @@
           "AttributeType": "S"
         },
         {
-          "AttributeName": "idempotencyKey",
+          "AttributeName": "idempotency_key",
           "AttributeType": "S"
         },
         {
@@ -201,58 +278,20 @@
         {
           "AttributeName": "payment_source_type",
           "AttributeType": "S"
-        }
-      ],
-      "GlobalSecondaryIndexes": [
+        },
         {
-          "IndexName": "order_status_id_index",
-          "KeyAttributes": {
-            "PartitionKey": {
-              "AttributeName": "order_status_id",
-              "AttributeType": "S"
-            }
-          },
-          "Projection": {
-            "ProjectionType": "KEYS_ONLY"
-          }
+          "AttributeName": "is_delete",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "create_at",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "update_at",
+          "AttributeType": "S"
         }
       ],
-      "DataAccess": {
-        "MySql": {}
-      }
-    },
-    {
-      "TableName": "products",
-      "KeyAttributes": {
-        "PartitionKey": {
-          "AttributeName": "product_id",
-          "AttributeType": "S"
-        }
-      },
-      "DataAccess": {
-        "MySql": {}
-      }
-    },
-    {
-      "TableName": "orders",
-      "KeyAttributes": {
-        "PartitionKey": {
-          "AttributeName": "order_id",
-          "AttributeType": "S"
-        }
-      },
-      "DataAccess": {
-        "MySql": {}
-      }
-    },
-    {
-      "TableName": "artists",
-      "KeyAttributes": {
-        "PartitionKey": {
-          "AttributeName": "artist_id",
-          "AttributeType": "S"
-        }
-      },
       "DataAccess": {
         "MySql": {}
       }
@@ -261,18 +300,224 @@
       "TableName": "order_item_labels",
       "KeyAttributes": {
         "PartitionKey": {
-          "AttributeName": "itam_id",
+          "AttributeName": "item_id",
           "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "label_id",
+          "AttributeType": "N"
         }
       },
       "NonKeyAttributes": [
         {
-          "AttributeName": "label_id",
+          "AttributeName": "language",
           "AttributeType": "S"
         },
         {
           "AttributeName": "label",
           "AttributeType": "S"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "label-index",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "label_id",
+              "AttributeType": "N"
+            },
+            "SortKey": {
+              "AttributeName": "label",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "KEYS_ONLY"
+          }
+        }
+      ],
+      "TableData": [
+        {
+          "item_id": {
+            "S": "order_types"
+          },
+          "label_id": {
+            "N": "1"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "カップル"
+          }
+        },
+        {
+          "item_id": {
+            "S": "order_types"
+          },
+          "label_id": {
+            "N": "2"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "プレゼント"
+          }
+        },
+        {
+          "item_id": {
+            "S": "order_types"
+          },
+          "label_id": {
+            "N": "3"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "引退式"
+          }
+        },
+        {
+          "item_id": {
+            "S": "order_types"
+          },
+          "label_id": {
+            "N": "4"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "結婚式"
+          }
+        },
+        {
+          "item_id": {
+            "S": "production_times"
+          },
+          "label_id": {
+            "N": "1"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "１週間以内"
+          }
+        },
+        {
+          "item_id": {
+            "S": "production_times"
+          },
+          "label_id": {
+            "N": "2"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "１週間〜２週間"
+          }
+        },
+        {
+          "item_id": {
+            "S": "production_times"
+          },
+          "label_id": {
+            "N": "3"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "３週間ほど"
+          }
+        },
+        {
+          "item_id": {
+            "S": "production_times"
+          },
+          "label_id": {
+            "N": "4"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "１ヶ月以上"
+          }
+        },
+        {
+          "item_id": {
+            "S": "order_status"
+          },
+          "label_id": {
+            "N": "1"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "仮登録"
+          }
+        },
+        {
+          "item_id": {
+            "S": "order_status"
+          },
+          "label_id": {
+            "N": "2"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "決済完了・写真未登録"
+          }
+        },
+        {
+          "item_id": {
+            "S": "order_status"
+          },
+          "label_id": {
+            "N": "3"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "写真登録済み・作家連絡待ち"
+          }
+        },
+        {
+          "item_id": {
+            "S": "order_status"
+          },
+          "label_id": {
+            "N": "4"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "作家作業中"
+          }
+        },
+        {
+          "item_id": {
+            "S": "order_status"
+          },
+          "label_id": {
+            "N": "5"
+          },
+          "language": {
+            "S": "jp"
+          },
+          "label": {
+            "S": "作家完了"
+          }
         }
       ],
       "DataAccess": {
